@@ -97,12 +97,12 @@ sub populate_schema {
     };
 
     $schema->populate('Event', [
-        [ qw/id label length/ ],
-        [1, 'World War I',          'P4Y3M14D'],
-        [2, 'World sailing record', 'P57DT13H34M6S'],
-        [3, 'football match',       'PT90M'],
-        [4, 'marathon record',      'PT2H3M59S'],
-        [5, '100m record',          'PT9.58S'],
+        [ qw/id label length alternative_length/ ],
+        [1, 'World War I',          'P4Y3M14D', 'P7Y1M28D',],
+        [2, 'World sailing record', 'P57DT13H34M6S', 'P45DT13H42M53S'],
+        [3, 'football match',       'PT90M', 'PT60M'],
+        [4, 'marathon record',      'PT2H3M59S', 'PT2H3M23S'],
+        [5, '100m record',          'PT9.58S', 'PT9.572S'],
     ]);
 
 };

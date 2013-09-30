@@ -27,6 +27,10 @@ __PACKAGE__->add_columns(
         is_nullable        => 0,
         is_duration        => 1,
     },
+    alternative_length => {
+        data_type          => 'INTERVAL',
+        is_nullable        => 1,
+    },
 );
 __PACKAGE__->set_primary_key('id');
 

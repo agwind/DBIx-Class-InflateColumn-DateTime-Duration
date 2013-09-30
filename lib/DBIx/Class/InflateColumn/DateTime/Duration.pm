@@ -34,7 +34,7 @@ This module inflates/deflates designated columns into L<DateTime::Duration> obje
 use strict;
 use warnings;
 
-our $VERSION = '0.01002';
+our $VERSION = '0.01003';
 
 use base qw(DBIx::Class);
 
@@ -54,7 +54,9 @@ sub register_column {
     my ($self, $column, $info, @rest) = @_;
     $self->next::method($column, $info, @rest);
 
-    return unless defined $info->{is_duration};
+	 my $data_type = lc( $info->{data_type} || '' );
+
+    return unless (defined $info->{is_duration} or $data_type eq 'interval');
 
     $self->inflate_column(
         $column => {

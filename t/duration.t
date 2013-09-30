@@ -11,7 +11,7 @@ BEGIN {
     if($@) {
         plan skip_all => 'DBD::SQLite not installed';
     } else {
-        plan tests => 27;
+        plan tests => 30;
     };
 
     use_ok('DateTime::Duration');
@@ -57,6 +57,11 @@ my $schema = DBIC::Test->init_schema;
     isa_ok($event->length, 'DateTime::Duration');
     is($event->length->delta_seconds, 9, 'delta_seconds');
     is($event->length->delta_nanoseconds, 580_000_000, 'delta_nanoseconds');
+
+    ## interval types should be handed automatically with register_column
+    isa_ok($event->alternative_length, 'DateTime::Duration');
+    is($event->alternative_length->delta_seconds, 9, 'delta_seconds');
+    is($event->alternative_length->delta_nanoseconds, 572_000_000, 'delta_nanoseconds');
 
     ## create with objects/deflate
     my $row = $schema->resultset('Event')->create({
