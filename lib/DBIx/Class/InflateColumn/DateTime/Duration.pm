@@ -20,6 +20,17 @@ Load this component and then declare one or more columns as duration columns.
       },
   );
 
+Or let it register with your 'interval' columns automatically
+
+  package Holiday;
+  __PACKAGE__->load_components(qw/InflateColumn::DateTime::Duration Core/);
+  __PACKAGE__->add_columns(
+      length => {
+          datatype      => 'interval',
+          is_nullable   => 1,
+      },
+  );
+  
 Then you can treat the specified column as a L<DateTime::Duration> object.
 
   print 'days: ', $holiday->length->delta_days, "\n";
@@ -27,7 +38,7 @@ Then you can treat the specified column as a L<DateTime::Duration> object.
 
 =head1 DESCRIPTION
 
-This module inflates/deflates designated columns into L<DateTime::Duration> objects.
+This module inflates/deflates 'interval' type or designated columns into L<DateTime::Duration> objects.
 
 =cut
 

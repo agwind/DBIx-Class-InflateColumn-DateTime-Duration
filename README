@@ -17,14 +17,25 @@ SYNOPSIS
           },
       );
 
+    Or let it register with your 'interval' columns automatically
+
+      package Holiday;
+      __PACKAGE__->load_components(qw/InflateColumn::DateTime::Duration Core/);
+      __PACKAGE__->add_columns(
+          length => {
+              datatype      => 'interval',
+              is_nullable   => 1,
+          },
+      );
+
     Then you can treat the specified column as a DateTime::Duration object.
 
       print 'days: ', $holiday->length->delta_days, "\n";
       print 'hours: ', $holiday->length->delta_hours, "\n";
 
 DESCRIPTION
-    This module inflates/deflates designated columns into DateTime::Duration
-    objects.
+    This module inflates/deflates 'interval' type or designated columns into
+    DateTime::Duration objects.
 
 METHODS
   register_column
